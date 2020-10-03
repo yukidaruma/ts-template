@@ -16,7 +16,10 @@
     "eslint": "^7.10.0",
     "eslint-config-prettier": "^6.12.0",
     "eslint-plugin-jest": "^24.0.2",
+    "husky": "^4.3.0",
     "jest": "^26.4.2",
+    "lint-staged": "^10.4.0",
+    "npm-run-all": "^4.1.5",
     "prettier": "^2.1.2",
     "rimraf": "^3.0.2",
     "ts-jest": "^26.4.1",
@@ -28,11 +31,25 @@
     "clean": "rimraf coverage build tmp",
     "build": "tsc -p tsconfig.release.json",
     "build:watch": "tsc -w -p tsconfig.release.json",
+    "format": "prettier --write \"src/**/*.{ts,tsx,json}\"",
     "lint": "eslint . --ext .ts,.tsx",
+    "lint:fix": "npm run lint -- --fix",
     "start": "node build/src/main.js",
     "watch": "tsc-watch -p tsconfig.release.json --onSuccess \"npm start\"",
     "test": "jest --coverage",
     "test:watch": "jest --watch"
+  },
+  "lint-staged": {
+    "*.{ts,tsx}": [
+      "prettier --write",
+      "eslint --fix"
+    ],
+    "*.json": "prettier --write"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
   },
   "author": "yukidaruma (https://github.com/yukidaruma)",
   "license": "MIT"
