@@ -44,7 +44,7 @@
       "prettier --write",
       "eslint --fix"
     ],
-    "*.json": "prettier --write"
+    "*.{json,yml,yaml,md}": "prettier --write"
   },
   "husky": {
     "hooks": {
